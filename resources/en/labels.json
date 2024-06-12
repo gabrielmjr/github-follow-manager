@@ -1,0 +1,15 @@
+{
+  "menu": [
+    {
+      "text": "Enter 1 to list all users that are following you.",
+      "id": 1
+    },
+    {
+      "text": "Enter 2 to list all users that you're following,",
+      "id": 2
+    }
+  ],
+  "others": {
+    "ask_name": "Enter your github username: "
+  }
+}
