@@ -13,8 +13,8 @@ class GithubRequest:
         self.url = f"https://api.github.com/users/{username}"
         pass
 
-    def get_all_followers(self):
-        return requests.get(self.url + '/followers?per_page=40', headers=self.headers).json()
+    def get_followers_at(self, page):
+        return requests.get(self.url + f'/followers?per_page=40&page={page}', headers=self.headers).json()
 
     @staticmethod
     def get_instance(username):
