@@ -8,8 +8,7 @@ class Executor:
     def __init__(self):
         self.headers = None
         self.url = None
-        self.language = 1
-        self.current_page = 1
+        self.language = self.current_page = 1
         self.followers = []
         self.github_requests = None
         self.configs = confs.Configurations.get_instance()
@@ -31,7 +30,8 @@ class Executor:
 
     def print_followers(self, is_in_pagination):
         print("Listing all users that follows you.\n")
-        temp_followers = utils.getOnlyNames(self.github_requests.get_followers_at(self.current_page))
+        temp_followers = utils.get_only_names(self.github_requests
+                                              .get_followers_at(self.current_page))
         if len(temp_followers) == 0:
             print("Empty page.")
             return

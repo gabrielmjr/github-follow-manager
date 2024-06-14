@@ -1,5 +1,4 @@
 import json
-import pathlib
 from executor import labels as lb
 from pathlib import Path
 
@@ -28,16 +27,18 @@ class Configurations:
         self.configs['username'] = str(input(self.labels.loaded_labels['others']['ask_name']))
 
     def setup_configurations(self):
-        configs_path = Path(f"{pathlib.Path(__file__).parent.resolve().absolute()}/../resources/configs.json")
+        configs_path = Path(f"{Path(__file__).parent.resolve().absolute()}"
+                            f"/../resources/configs.json")
         if configs_path.exists():
-            with open(configs_path, 'r') as configs:
+            with open(configs_path, 'r', encoding='utf-8') as configs:
                 self.configs = json.loads(configs.read())
         else:
-            print("The following configurations will be prompted once and stored in resources/configs.json")
+            print("The following configurations will be prompted once and stored in resources"
+                  "/configs.json")
             self.ask_lang()
             self.labels = lb.LabelsManager.get_instance(self.configs['lang'])
             self.ask_username()
-            with open(configs_path, 'w') as configs:
+            with open(configs_path, 'w', encoding='utf-8') as configs:
                 configs.write(json.dumps(self.configs))
 
     def get_language(self):

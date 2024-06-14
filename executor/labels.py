@@ -14,7 +14,8 @@ class LabelsManager:
         self.load_labels()
 
     def read_labels(self):
-        with open(f'{pathlib.Path(__file__).parent.resolve().absolute()}/../resources/{self.lang}/labels.json') as json_data:
+        with open(f'{pathlib.Path(__file__).parent.resolve().absolute()}/../'
+                  f'resources/{self.lang}/labels.json', encoding='utf-8') as json_data:
             json_label = json.load(json_data)
         return json_label
 
@@ -26,6 +27,6 @@ class LabelsManager:
 
     @staticmethod
     def get_instance(lang: str):
-        if not (isinstance(LabelsManager.instance, LabelsManager)):
+        if not isinstance(LabelsManager.instance, LabelsManager):
             LabelsManager.instance = LabelsManager(lang)
         return LabelsManager.instance
