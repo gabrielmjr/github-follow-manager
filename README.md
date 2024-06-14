@@ -1,5 +1,8 @@
 # Reciprometer
 
+***Build state:***
+ ![](https://github.com/gabrielmjr/reciprometer/actions/workflows/python-package.yml/badge.svg)
+
 ## Description
 
 Does people who you're following must follow you also? well, this repository is for you.
