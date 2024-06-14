@@ -5,7 +5,7 @@
 Does people who you're following must follow you also? well, this repository is for you.
 <br/>
 This is a project that was made in Python and you can use id to:
-1. - [ ] See everyone who're following you.
+1. - [x] See everyone who're following you.
 2. - [ ] See everyone who you're following.
 3. - [ ] Follow all users with their username saved in a JSON or CSV(Auth token required).
 4. - [ ] Unfollow all users (Auth token required).
@@ -17,7 +17,7 @@ This is a project that was made in Python and you can use id to:
 
 > [!Note]
 > 1. This program asks you an github username, this field can be filled by any github username and will works well because github API is opened for everyone.
-> 2. To use the follow [3] and unfollow [4] funtions, you'll need to add your github Authwntication Token, you'll be instructed when run the program.
+> 2. To use the follow [3] and unfollow [4] funtions, you'll need to add your github Authentication Token, you'll be instructed when run the program.
 
 <br/>
 
@@ -42,11 +42,11 @@ This is a project that was made in Python and you can use id to:
 
        python main.py
    
-5. Congratulation, you've setup your environment runned the reciprometer, there will be instructions to use, the program is terminal friendly, there's usage menu that makes it easy to use.
+5. Congratulation, you've setup your environment and runned the reciprometer, there will be instructions to use, the program is terminal friendly, there's usage menu that makes it easy to use.
 <br/>
 
 ## Aditional
-If are facing some issue related to the reciprometer, you can open an issue and if you can, else if you can, clone the source code, improve or refactor it and make a pull request, if it be useful, then I'll merge.
+If you are facing some issue related to the reciprometer, you can open an issue and if you can, else if you can, clone the source code, improve or refactor it and make a pull request, if it be useful, then I'll merge.
 
 <br/>
 
