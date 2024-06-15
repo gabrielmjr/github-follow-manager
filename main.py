@@ -5,11 +5,14 @@ from util import utils
 
 
 class Executor:
+    ACTION_FOLLOWERS = 0
+    ACTION_FOLLOWING = 1
+
     def __init__(self):
         self.headers = None
         self.url = None
         self.language = self.current_page = 1
-        self.followers = []
+        self.followers = self.following = []
         self.github_requests = None
         self.configs = confs.Configurations.get_instance()
         self.labels = None
@@ -27,6 +30,8 @@ class Executor:
             command = int(input(">>> "))
             if command == 1:
                 self.print_followers(False)
+            if command == 2:
+                self.print_following(False)
 
     def print_followers(self, is_in_pagination):
         print("Listing all users that follows you.\n")
@@ -45,9 +50,28 @@ class Executor:
                 return
         if not is_in_pagination:
             print(10 * '-')
-            self.start_pagination()
+            self.start_pagination(Executor.ACTION_FOLLOWERS)
 
-    def start_pagination(self):
+    def print_following(self, is_in_pagination):
+        print("Listing all users that you are following.\n")
+        temp_following = utils.get_only_names(self.github_requests
+                                              .get_following_at(self.current_page))
+        if len(temp_following) == 0:
+            print("Empty page.")
+            return
+        for following in temp_following:
+            if following not in self.following:
+                self.following.append(following)
+        for i in range(40 * (self.current_page - 1), 40 * self.current_page):
+            try:
+                print(self.following[i])
+            except IndexError:
+                return
+        if not is_in_pagination:
+            print(10 * '-')
+            self.start_pagination(Executor.ACTION_FOLLOWING)
+
+    def start_pagination(self, action):
         must_stop = False
         while True:
             if not must_stop:
@@ -60,19 +84,33 @@ class Executor:
             print("Enter 3 to re-print this page")
             print("Enter 0 to exit paging mode")
             command = int(input(">>> "))
-            if command == 1:
-                self.current_page = self.current_page + 1
-                self.print_followers(True)
+            if action == Executor.ACTION_FOLLOWERS:
+                if command == 1:
+                    self.current_page = self.current_page + 1
+                    self.print_followers(True)
+                elif command == 2:
+                    if self.current_page == 1:
+                        print("Already in the beginning")
+                        continue
+                    self.current_page = self.current_page - 1
+                    self.print_followers(True)
+                elif command == 3:
+                    self.print_followers(True)
+            if action == Executor.ACTION_FOLLOWING:
+                if command == 1:
+                    self.current_page = self.current_page + 1
+                self.print_following(True)
             elif command == 2:
                 if self.current_page == 1:
                     print("Already in the beginning")
                     continue
                 self.current_page = self.current_page - 1
-                self.print_followers(True)
+                self.print_following(True)
             elif command == 3:
-                self.print_followers(True)
+                self.print_following(True)
             elif command == 0:
                 print("Paging mode off")
+                self.current_page = 1
                 break
             else:
                 print("Command not found")

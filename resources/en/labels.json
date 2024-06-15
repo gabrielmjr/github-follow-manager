@@ -5,8 +5,24 @@
       "id": 1
     },
     {
-      "text": "Enter 2 to list all users that you're following,",
+      "text": "Enter 2 to list all users that you're following.",
       "id": 2
+    },
+    {
+      "text": "Enter 3 to follow all users with their username saved in a JSON or CSV(Auth token required).",
+      "id": 3
+    },
+    {
+      "text": "Enter 2 to list all users that you're following,",
+      "id": 4
+    },
+    {
+      "text": "Enter 2 to list all users that you're following,",
+      "id": 5
+    },
+    {
+      "text": "Enter 2 to list all users that you're following,",
+      "id": 6
     }
   ],
   "others": {
