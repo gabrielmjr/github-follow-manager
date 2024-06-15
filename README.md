@@ -9,7 +9,7 @@ Does people who you're following must follow you also? well, this repository is 
 <br/>
 This is a project that was made in Python and you can use id to:
 1. - [x] See everyone who're following you.
-2. - [ ] See everyone who you're following.
+2. - [x] See everyone who you're following.
 3. - [ ] Follow all users with their username saved in a JSON or CSV(Auth token required).
 4. - [ ] Unfollow all users (Auth token required).
 5. - [ ] Follow only who are following you (Auth token required).
