@@ -13,16 +13,20 @@
       "id": 3
     },
     {
-      "text": "Enter 2 to list all users that you're following,",
+      "text": "Enter 2 to list all users that you're following.",
       "id": 4
     },
     {
-      "text": "Enter 2 to list all users that you're following,",
+      "text": "Enter 2 to list all users that you're following.",
       "id": 5
     },
     {
-      "text": "Enter 2 to list all users that you're following,",
+      "text": "Enter 6 to make a backup of users that follows you in a CSV/JSON.",
       "id": 6
+    },
+    {
+      "text": "Enter 2 to list all users that you're following.",
+      "id": 7
     }
   ],
   "others": {

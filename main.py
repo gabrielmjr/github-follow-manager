@@ -1,6 +1,12 @@
+import csv
+import json
+import os.path
+import pathlib
+
 import executor.github_request
 from executor import labels as lb
 from executor import configs as confs
+import time
 from util import utils
 
 
@@ -12,11 +18,18 @@ class Executor:
         self.headers = None
         self.url = None
         self.language = self.current_page = 1
-        self.followers = self.following = []
         self.github_requests = None
+        self.backup_dir = None
+        self.create_backup_dir()
         self.configs = confs.Configurations.get_instance()
         self.labels = None
         self.execute()
+
+    def create_backup_dir(self):
+        self.backup_dir = (f'{pathlib.Path(__file__).parent.resolve().absolute()}' +
+                           '/resources/backups')
+        if not os.path.isdir(self.backup_dir):
+            os.mkdir(self.backup_dir)
 
     def execute(self):
         self.labels = lb.LabelsManager.get_instance(self.configs.get_language())
@@ -32,8 +45,11 @@ class Executor:
                 self.print_followers(False)
             if command == 2:
                 self.print_following(False)
+            if command == 6:
+                self.start_backup_process()
 
     def print_followers(self, is_in_pagination):
+        followers = []
         print("Listing all users that follows you.\n")
         temp_followers = utils.get_only_names(self.github_requests
                                               .get_followers_at(self.current_page))
@@ -41,11 +57,11 @@ class Executor:
             print("Empty page.")
             return
         for follower in temp_followers:
-            if follower not in self.followers:
-                self.followers.append(follower)
+            if follower not in followers:
+                followers.append(follower)
         for i in range(40 * (self.current_page - 1), 40 * self.current_page):
             try:
-                print(list(self.followers)[i])
+                print(list(followers)[i])
             except IndexError:
                 return
         if not is_in_pagination:
@@ -53,6 +69,7 @@ class Executor:
             self.start_pagination(Executor.ACTION_FOLLOWERS)
 
     def print_following(self, is_in_pagination):
+        following = []
         print("Listing all users that you are following.\n")
         temp_following = utils.get_only_names(self.github_requests
                                               .get_following_at(self.current_page))
@@ -60,11 +77,11 @@ class Executor:
             print("Empty page.")
             return
         for following in temp_following:
-            if following not in self.following:
-                self.following.append(following)
+            if following not in following:
+                following.append(following)
         for i in range(40 * (self.current_page - 1), 40 * self.current_page):
             try:
-                print(self.following[i])
+                print(following[i])
             except IndexError:
                 return
         if not is_in_pagination:
@@ -114,6 +131,41 @@ class Executor:
                 break
             else:
                 print("Command not found")
+
+    def start_backup_process(self):
+        followers = []
+        self.current_page = 1
+        while True:
+            temp_followers = utils.get_only_names(
+                self.github_requests.get_followers_at(self.current_page))
+            if len(temp_followers) == 0:
+                self.save_users(followers)
+                break
+            followers = followers + temp_followers
+            self.current_page = self.current_page + 1
+
+    def save_users(self, followers):
+        print("Enter 1 to save to a CSV.")
+        print("Enter 2 to save to a JSON.")
+        command = int(input(">>> "))
+        if command == 1:
+            self.write_backup_to_csv(followers)
+        if command == 2:
+            self.write_backup_to_json(followers)
+
+    def write_backup_to_csv(self, followers):
+        with open(self.backup_dir + f'/{self.current_time()}.csv', 'w') as csc_file:
+            writer = csv.writer(csc_file)
+            writer.writerow(followers)
+
+    def write_backup_to_json(self, followers):
+        with open(self.backup_dir + f'/{self.current_time()}.json', 'w') as json_file:
+            json_users = json.dumps(followers)
+            json_file.write(json_users)
+
+    @staticmethod
+    def current_time():
+        return time.time()
 
 
 if __name__ == '__main__':
