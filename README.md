@@ -14,7 +14,7 @@ This is a project that was made in Python and you can use it to:
 4. - [x] Unfollow all users (Auth token required).
 5. - [ ] Follow only who are following you (Auth token required).
 6. - [x] Make a backup of your followers in a JSON or CSV.
-7. - [ ] Make a backup of everyone who you are following in a JSON or CSV.
+7. - [x] Make a backup of everyone who you are following in a JSON or CSV.
 
 <br/>
 
