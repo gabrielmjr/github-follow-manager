@@ -50,8 +50,8 @@ This is a project that was made in Python and you can use it to:
 5. Congratulation, you've setup your environment and runned the reciprometer, there will be instructions to use, the program is terminal friendly, there's usage menu that makes it easy to use.
 <br/>
 
-## Aditional
-If you are facing some issue related to the reciprometer, you can open an issue and if you can, else if you can, clone the source code, improve or refactor it and make a pull request, if it be useful, then I'll merge.
+## Additional
+If you are facing some issue related to the reciprometer, you can open an issue, else if you can, clone the source code, improve or refactor it and make a pull request, if it be useful, then I'll merge.
 
 <br/>
 
