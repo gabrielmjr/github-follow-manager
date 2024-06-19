@@ -30,12 +30,14 @@ This is a project that was made in Python and you can use it to:
 > To use the reciprometer, you've to be with Python (3) installed in your environment, if you don't have it installed, you can download it from the [official site](https://www.python.org/downloads/), alternativery you can [follow this tutorial](https://kinsta.com/knowledgebase/install-python/) or google `how to install python in <the OS name intalled on your machine>` and follow the instructions.
 
 1. Clone the git project using:
+> [!Note]
+> After first release, you'll have option of download the stable release source code and then run the script instead of clonning it.
 
 
        git clone https://github.com/gabrielmjr/reciprometer
 
 
-2. Open up the `reciprometer` folder and install all the required libraries as followed:
+3. Open up the `reciprometer` folder and install all the required libraries as followed:
 
         cd reciprometer
         pip install -r (or --requirement) requirements.txt
