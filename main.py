@@ -49,7 +49,9 @@ class Executor:
             if command == 4:
                 self.unfollow_everyone()
             if command == 6:
-                self.start_backup_process()
+                self.start_followers_backup_process()
+            if command == 7:
+                self.start_following_backup_process()
 
     def print_followers(self, is_in_pagination):
         followers = []
@@ -159,34 +161,46 @@ class Executor:
         else:
             print("Something went wrong.")
 
-    def start_backup_process(self):
+    def start_followers_backup_process(self):
         followers = []
         self.current_page = 1
         while True:
             temp_followers = utils.get_only_names(
                 self.github_requests.get_followers_at(self.current_page))
             if len(temp_followers) == 0:
-                self.save_users(followers)
+                self.save_users(followers, 'followers')
                 break
             followers = followers + temp_followers
-            self.current_page = self.current_page + 1
+            self.current_page += 1
 
-    def save_users(self, followers):
+    def start_following_backup_process(self):
+        following = []
+        self.current_page = 1
+        while True:
+            temp_followings = utils.get_only_names(
+                self.github_requests.get_following_at(self.current_page))
+            if len(temp_followings) == 0:
+                self.save_users(following, 'following')
+                break
+            following = following + temp_followings
+            self.current_page += 1
+
+    def save_users(self, followers, target):
         print("Enter 1 to save to a CSV.")
         print("Enter 2 to save to a JSON.")
         command = int(input(">>> "))
         if command == 1:
-            self.write_backup_to_csv(followers)
+            self.write_backup_to_csv(followers, target)
         if command == 2:
-            self.write_backup_to_json(followers)
+            self.write_backup_to_json(followers, target)
 
-    def write_backup_to_csv(self, followers):
-        with open(self.backup_dir + f'/{self.current_time()}.csv', 'w') as csc_file:
+    def write_backup_to_csv(self, followers, target):
+        with open(self.backup_dir + f'/{self.current_time()}.{target}.csv', 'w') as csc_file:
             writer = csv.writer(csc_file)
             writer.writerow(followers)
 
-    def write_backup_to_json(self, followers):
-        with open(self.backup_dir + f'/{self.current_time()}.json', 'w') as json_file:
+    def write_backup_to_json(self, followers, target):
+        with open(self.backup_dir + f'/{self.current_time()}.{target}.json', 'w') as json_file:
             json_users = json.dumps(followers)
             json_file.write(json_users)
 

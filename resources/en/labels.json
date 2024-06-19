@@ -21,11 +21,11 @@
       "id": 5
     },
     {
-      "text": "Enter 6 to make a backup of users that follows you in a CSV/JSON.",
+      "text": "Enter 6 to make a backup of your followers in a CSV/JSON.",
       "id": 6
     },
     {
-      "text": "Enter 2 to list all users that you're following.",
+      "text": "Enter 7 to make a backup of users that follows you in a CSV/JSON.",
       "id": 7
     }
   ],

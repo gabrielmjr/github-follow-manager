@@ -30,7 +30,6 @@ class GithubRequest:
             return True
         return False
 
-
     @staticmethod
     def get_instance(username):
         if not isinstance(GithubRequest.instance, GithubRequest):
