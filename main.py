@@ -38,6 +38,7 @@ class Executor:
 
     def handle_inputs(self):
         while True:
+            self.current_page = 1
             for label in self.labels.get_menu():
                 print(label['text'])
             command = int(input(">>> "))
@@ -45,6 +46,8 @@ class Executor:
                 self.print_followers(False)
             if command == 2:
                 self.print_following(False)
+            if command == 4:
+                self.unfollow_everyone()
             if command == 6:
                 self.start_backup_process()
 
@@ -71,14 +74,14 @@ class Executor:
     def print_following(self, is_in_pagination):
         following = []
         print("Listing all users that you are following.\n")
-        temp_following = utils.get_only_names(self.github_requests
-                                              .get_following_at(self.current_page))
+        temp_following = utils.get_only_names(
+            self.github_requests.get_following_at(self.current_page))
         if len(temp_following) == 0:
             print("Empty page.")
             return
-        for following in temp_following:
-            if following not in following:
-                following.append(following)
+        for _following in temp_following:
+            if _following not in following:
+                following.append(_following)
         for i in range(40 * (self.current_page - 1), 40 * self.current_page):
             try:
                 print(following[i])
@@ -131,6 +134,30 @@ class Executor:
                 break
             else:
                 print("Command not found")
+
+    def unfollow_everyone(self):
+        following = []
+        print("Enter your github auth token")
+        auth_token = str(input(">>> "))
+        self.current_page = 1
+        while True:
+            temp_following = utils.get_only_names(
+                self.github_requests.get_following_at(self.current_page))
+            if len(temp_following) == 0:
+                self.unfollow_users(following, auth_token)
+                break
+            following = following + temp_following
+            self.current_page = self.current_page + 1
+
+    def unfollow_users(self, users, auth_token):
+        are_everyone_unfollowed = True
+        for user in users:
+            if not self.github_requests.unfollow(user, auth_token):
+                are_everyone_unfollowed = False
+        if are_everyone_unfollowed:
+            print("Unfollowed everyone.")
+        else:
+            print("Something went wrong.")
 
     def start_backup_process(self):
         followers = []

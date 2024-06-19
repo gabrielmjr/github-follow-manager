@@ -1,3 +1,5 @@
+import http.client
+
 import requests
 
 
@@ -19,6 +21,15 @@ class GithubRequest:
     def get_following_at(self, page):
         return requests.get(self.url + f'/following?per_page=40&page={page}',
                             headers=self.headers).json()
+
+    def unfollow(self, user, auth_token):
+        headers = dict(list(self.headers.items()) + list({"Authorization": "token " + auth_token}.items()))
+        url = f'https://api.github.com/user/following/{user}'
+        code = requests.delete(url, headers=headers).status_code
+        if code == http.client.NO_CONTENT:
+            return True
+        return False
+
 
     @staticmethod
     def get_instance(username):
