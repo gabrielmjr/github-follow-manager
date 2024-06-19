@@ -9,15 +9,15 @@
       "id": 2
     },
     {
-      "text": "Enter 3 to follow all users with their username saved in a JSON or CSV(Auth token required).",
+      "text": "Enter 3 to follow all users with their username saved in a JSON or CSV (Auth token required).",
       "id": 3
     },
     {
-      "text": "Enter 4 to unfollow everyone that you follows.",
+      "text": "Enter 4 to unfollow everyone that you follows (Auth token required).",
       "id": 4
     },
     {
-      "text": "Enter 2 to list all users that you're following.",
+      "text": "Enter 5 to follow only who is following you (Auth token required).",
       "id": 5
     },
     {
@@ -25,7 +25,7 @@
       "id": 6
     },
     {
-      "text": "Enter 7 to make a backup of users that follows you in a CSV/JSON.",
+      "text": "Enter 7 to make a backup of users that follows you in a CSV/JSON",
       "id": 7
     }
   ],
