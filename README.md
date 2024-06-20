@@ -1,11 +1,11 @@
-# Reciprometer
+# GitHub Follow Manager
 
 ***Build state:***
  ![](https://github.com/gabrielmjr/reciprometer/actions/workflows/python-package.yml/badge.svg)
 
 ## Description
 
-Does people who you're following must follow you also? well, this repository is for you.
+Does people who you're following must follow you also? well, this repository is for you. This repository can also help you to manage your followers and users who you are following in CLI.
 <br/>
 This is a project that was made in Python and you can use it to:
 1. - [x] See everyone who're following you.
