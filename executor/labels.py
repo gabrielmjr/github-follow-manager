@@ -6,10 +6,7 @@ class LabelsManager:
     instance = None
 
     def __init__(self, lang):
-        if lang == 2:
-            self.lang = "pt"
-        else:
-            self.lang = "en"
+        self.lang = lang
         self.loaded_labels = None
         self.load_labels()
 

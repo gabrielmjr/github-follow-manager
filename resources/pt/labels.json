@@ -1,0 +1,66 @@
+{
+  "menu": [
+    {
+      "text": "Insira 1 para listar todos os usu�rios que est�o te seguindo."
+    },
+    {
+      "text": "Insira 2 para listar todos usu�rios que voc� segue."
+    },
+    {
+      "text": "Insira 3 para seguir todos os usu�rios com seus nomes salvos em um JSON/CSV (Requer autenticaç�o)."
+    },
+    {
+      "text": "Insira 4 para deixar de seguir todos (Requer autenticaç�o)."
+    },
+    {
+      "text": "Insira 5 para seguir somente quem te segue (Requer autenticaç�o)."
+    },
+    {
+      "text": "Insira 6 para criar uma c�pia de segurança dos teus seguidores em um CSV/JSON."
+    },
+    {
+      "text": "Insira 7 para criar uma c�pia de segurança de usu�rios que te seguem CSV/JSON"
+    }
+  ],
+  "listing_followers": "Listando os seus seguidores.",
+  "listing_following": "Listando todos os usu�rios que voc� segue.",
+  "empty_page": "P�gina vazia.",
+  "pagination": {
+    "on": "Modo de paginaç�o activado",
+    "off": "Modo de paginaç�o desactivado"
+  },
+  "pagination_menu": [
+    {
+      "text": "Insira 1 para ir a pr�xima p�gina."
+    },
+    {
+      "text": "Insira 2 para ir � p�gina anterior."
+    },
+    {
+      "text": "Insira 3 para re-imprimir essa p�gina."
+    },
+    {
+      "text": "Insira 0 para sair do modo de paginaç�o."
+    }
+  ],
+  "others": {
+    "ask_name": "Insira o seu nome de usu�rio do Github: "
+  },
+  "already_in_the_beginning": "J� est� no inicio.",
+  "command_not_found": "Comando n�o encontrado.",
+  "enter_your_token": "Insira o seu token de autenticaç�o do Github: ",
+  "followed_everyone": "J� est� seguindo todos.",
+  "unfollowed_everyone": "Deixou de seguir todos.",
+  "error": {
+    "unknown": "Algo ocorreu mal."
+  },
+  "save_options": [
+    {
+      "text": "Insira 1 para salvar em um CSV."
+    },
+    {
+      "text": "Insira 2 para salvar em um JSON."
+    }
+  ],
+  "initial_conf_text": "As seguintes configuraç�es ser�o solicitadas somente uma vez e salvas em resources/configs.json"
+}

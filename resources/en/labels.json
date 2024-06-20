@@ -7,7 +7,7 @@
       "text": "Enter 2 to list all users that you're following."
     },
     {
-      "text": "Enter 3 to follow all users with their username saved in a JSON or CSV (Auth token required)."
+      "text": "Enter 3 to follow all users with their username saved in a JSON/CSV (Auth token required)."
     },
     {
       "text": "Enter 4 to unfollow everyone that you follows (Auth token required)."
