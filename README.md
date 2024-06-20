@@ -27,19 +27,19 @@ This is a project that was made in Python and you can use it to:
 ## How to use?
 
 > [!Important]
-> To use the reciprometer, you've to be with Python (3) installed in your environment, if you don't have it installed, you can download it from the [official site](https://www.python.org/downloads/), alternativery you can [follow this tutorial](https://kinsta.com/knowledgebase/install-python/) or google `how to install python in <the OS name intalled on your machine>` and follow the instructions.
+> To use the GitHub Follow Manager, you've to be with Python (3) installed in your environment, if you don't have it installed, you can download it from the [official site](https://www.python.org/downloads/), alternativery you can [follow this tutorial](https://kinsta.com/knowledgebase/install-python/) or google `how to install python in <the OS name intalled on your machine>` and follow the instructions.
 
 1. Clone the git project using:
 > [!Note]
 > After first release, you'll have option of download the stable release source code and then run the script instead of clonning it.
 
 
-       git clone https://github.com/gabrielmjr/reciprometer
+       git clone https://github.com/gabrielmjr/github-follow-manager
 
 
-3. Open up the `reciprometer` folder and install all the required libraries as followed:
+3. Open up the `github-follow-manager` folder and install all the required libraries as followed:
 
-        cd reciprometer
+        cd github-follow-manager
         pip install -r (or --requirement) requirements.txt
    The above code will install all required libraries to execute the program, in this case is only the [requests](https://pypi.org/project/requests) library, after the installation of this library you can go to next step.
 
@@ -47,11 +47,11 @@ This is a project that was made in Python and you can use it to:
 
        python main.py
    
-5. Congratulation, you've setup your environment and runned the reciprometer, there will be instructions to use, the program is terminal friendly, there's usage menu that makes it easy to use.
+5. Congratulation, you've setup your environment and runned the GitHub Follow Manager, there will be instructions to use, the program is terminal friendly, there's usage menu that makes it easy to use.
 <br/>
 
 ## Additional
-If you are facing some issue related to the reciprometer, you can open an issue, else if you can, clone the source code, improve or refactor it and make a pull request, if it be useful, then I'll merge.
+If you are facing some issue related to the GitHub Follow Manager, you can open an issue, else if you can, clone the source code, improve or refactor it and make a pull request, if it be useful, then I'll merge.
 
 <br/>
 
