@@ -33,10 +33,9 @@ class Configurations:
             with open(configs_path, 'r', encoding='utf-8') as configs:
                 self.configs = json.loads(configs.read())
         else:
-            print("The following configurations will be prompted once and stored in resources"
-                  "/configs.json")
             self.ask_lang()
             self.labels = lb.LabelsManager.get_instance(self.configs['lang'])
+            print(self.labels.loaded_labels['initial_conf_text'])
             self.ask_username()
             with open(configs_path, 'w', encoding='utf-8') as configs:
                 configs.write(json.dumps(self.configs))

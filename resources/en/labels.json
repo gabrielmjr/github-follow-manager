@@ -1,35 +1,66 @@
 {
   "menu": [
     {
-      "text": "Enter 1 to list all users that are following you.",
-      "id": 1
+      "text": "Enter 1 to list all users that are following you."
     },
     {
-      "text": "Enter 2 to list all users that you're following.",
-      "id": 2
+      "text": "Enter 2 to list all users that you're following."
     },
     {
-      "text": "Enter 3 to follow all users with their username saved in a JSON or CSV (Auth token required).",
-      "id": 3
+      "text": "Enter 3 to follow all users with their username saved in a JSON or CSV (Auth token required)."
     },
     {
-      "text": "Enter 4 to unfollow everyone that you follows (Auth token required).",
-      "id": 4
+      "text": "Enter 4 to unfollow everyone that you follows (Auth token required)."
     },
     {
-      "text": "Enter 5 to follow only who is following you (Auth token required).",
-      "id": 5
+      "text": "Enter 5 to follow only who is following you (Auth token required)."
     },
     {
-      "text": "Enter 6 to make a backup of your followers in a CSV/JSON.",
-      "id": 6
+      "text": "Enter 6 to make a backup of your followers in a CSV/JSON."
     },
     {
-      "text": "Enter 7 to make a backup of users that follows you in a CSV/JSON",
-      "id": 7
+      "text": "Enter 7 to make a backup of users that follows you in a CSV/JSON"
+    }
+  ],
+  "listing_followers": "Listing your followers.",
+  "listing_following": "Listing all users that you are following.",
+  "empty_page": "Empty page.",
+  "pagination": {
+    "on": "Paging mode on",
+    "off": "Paging mode off"
+  },
+  "pagination_menu": [
+    {
+      "text": "Enter 1 to go to the next page."
+    },
+    {
+      "text": "Enter 2 to go to previewer page."
+    },
+    {
+      "text": "Enter 3 to re-print this page."
+    },
+    {
+      "text": "Enter 0 to exit paging mode."
     }
   ],
   "others": {
     "ask_name": "Enter your github username: "
-  }
+  },
+  "already_in_the_beginning": "Already in the beginning.",
+  "command_not_found": "Command not found.",
+  "enter_your_token": "Enter your github auth token: ",
+  "followed_everyone": "Followed everyone.",
+  "unfollowed_everyone": "Unfollowed everyone.",
+  "error": {
+    "unknown": "Something went wrong."
+  },
+  "save_options": [
+    {
+      "text": "Enter 1 to save to a CSV."
+    },
+    {
+      "text": "Enter 2 to save to a JSON."
+    }
+  ],
+  "initial_conf_text": "The following configurations will be prompted once and stored in resources/configs.json"
 }

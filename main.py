@@ -55,11 +55,11 @@ class Executor:
 
     def print_followers(self, is_in_pagination):
         followers = []
-        print("Listing all users that follows you.\n")
+        print(f"{self.labels.loaded_labels['listing_followers']}\n")
         temp_followers = utils.get_only_names(self.github_requests
                                               .get_followers_at(self.current_page))
         if len(temp_followers) == 0:
-            print("Empty page.")
+            print(self.labels.loaded_labels['empty_page'])
             return
         for follower in temp_followers:
             if follower not in followers:
@@ -75,11 +75,11 @@ class Executor:
 
     def print_following(self, is_in_pagination):
         following = []
-        print("Listing all users that you are following.\n")
+        print(f"{self.labels.loaded_labels['listing_following']}\n")
         temp_following = utils.get_only_names(
             self.github_requests.get_following_at(self.current_page))
         if len(temp_following) == 0:
-            print("Empty page.")
+            print(self.labels.loaded_labels['empty_page'])
             return
         for _following in temp_following:
             if _following not in following:
@@ -100,11 +100,9 @@ class Executor:
                 pass
             else:
                 break
-            print("Paging mode on")
-            print("Enter 1 to go to the next page")
-            print("Enter 2 to go to previewer page")
-            print("Enter 3 to re-print this page")
-            print("Enter 0 to exit paging mode")
+            print(self.labels.loaded_labels['pagination']['on'])
+            for menu in self.labels.loaded_labels['pagination_menu']:
+                print(menu['text'])
             command = int(input(">>> "))
             if action == Executor.ACTION_FOLLOWERS:
                 if command == 1:
@@ -112,7 +110,7 @@ class Executor:
                     self.print_followers(True)
                 elif command == 2:
                     if self.current_page == 1:
-                        print("Already in the beginning")
+                        print(self.labels.loaded_labels['already_in_the_beginning'])
                         continue
                     self.current_page = self.current_page - 1
                     self.print_followers(True)
@@ -124,22 +122,22 @@ class Executor:
                 self.print_following(True)
             elif command == 2:
                 if self.current_page == 1:
-                    print("Already in the beginning")
+                    print(self.labels.loaded_labels['already_in_the_beginning'])
                     continue
                 self.current_page = self.current_page - 1
                 self.print_following(True)
             elif command == 3:
                 self.print_following(True)
             elif command == 0:
-                print("Paging mode off")
+                print(self.labels.loaded_labels['pagination']['off'])
                 self.current_page = 1
                 break
             else:
-                print("Command not found")
+                print(self.labels.loaded_labels['command_not_found'])
 
     def unfollow_everyone(self):
         following = []
-        print("Enter your github auth token")
+        print(self.labels.loaded_labels['enter_your_token'])
         auth_token = str(input(">>> "))
         self.current_page = 1
         while True:
@@ -157,9 +155,9 @@ class Executor:
             if not self.github_requests.unfollow(user, auth_token):
                 are_everyone_unfollowed = False
         if are_everyone_unfollowed:
-            print("Unfollowed everyone.")
+            print(self.labels.loaded_labels['unfollowed_everyone'])
         else:
-            print("Something went wrong.")
+            print(self.labels.loaded_labels['error']['unknown'])
 
     def start_followers_backup_process(self):
         followers = []
@@ -186,8 +184,8 @@ class Executor:
             self.current_page += 1
 
     def save_users(self, followers, target):
-        print("Enter 1 to save to a CSV.")
-        print("Enter 2 to save to a JSON.")
+        for save_option in self.labels.loaded_labels['save_options']:
+            print(save_option['label'])
         command = int(input(">>> "))
         if command == 1:
             self.write_backup_to_csv(followers, target)
