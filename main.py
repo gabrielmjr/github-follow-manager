@@ -1,12 +1,8 @@
-import csv
-import json
-import os.path
-import pathlib
+import utils
 
+from backup import BackupManager
 from preferences import Configurations, labels as lb
 from request import GithubRequest
-import time
-from util import utils
 
 
 class Executor:
@@ -14,21 +10,11 @@ class Executor:
     ACTION_FOLLOWING = 1
 
     def __init__(self):
-        self.headers = None
-        self.url = None
-        self.language = self.current_page = 1
+        self.current_page = 1
         self.github_requests = None
-        self.backup_dir = None
-        self.create_backup_dir()
         self.configs = Configurations.get_instance()
         self.labels = None
         self.execute()
-
-    def create_backup_dir(self):
-        self.backup_dir = (f'{pathlib.Path(__file__).parent.resolve().absolute()}' +
-                           '/resources/backups')
-        if not os.path.isdir(self.backup_dir):
-            os.mkdir(self.backup_dir)
 
     def execute(self):
         self.labels = lb.LabelsManager.get_instance(self.configs.get_language())
@@ -55,17 +41,13 @@ class Executor:
                 self.start_following_backup_process()
 
     def print_followers(self, is_in_pagination):
-        followers = []
         print(f"{self.labels.loaded_labels['listing_followers']}\n")
-        temp_followers = utils.get_only_names(self.github_requests
-                                              .get_followers_at(self.current_page))
-        if len(temp_followers) == 0:
+        followers = utils.get_only_names(self.github_requests
+                                         .get_followers_at(self.current_page))
+        if len(followers) == 0:
             print(self.labels.loaded_labels['empty_page'])
             return
-        for follower in temp_followers:
-            if follower not in followers:
-                followers.append(follower)
-        for i in range(40 * (self.current_page - 1), 40 * self.current_page):
+        for i in range(0, 40):
             try:
                 print(list(followers)[i])
             except IndexError:
@@ -75,17 +57,13 @@ class Executor:
             self.start_pagination(Executor.ACTION_FOLLOWERS)
 
     def print_following(self, is_in_pagination):
-        following = []
         print(f"{self.labels.loaded_labels['listing_following']}\n")
-        temp_following = utils.get_only_names(
+        following = utils.get_only_names(
             self.github_requests.get_following_at(self.current_page))
-        if len(temp_following) == 0:
+        if len(following) == 0:
             print(self.labels.loaded_labels['empty_page'])
             return
-        for _following in temp_following:
-            if _following not in following:
-                following.append(_following)
-        for i in range(40 * (self.current_page - 1), 40 * self.current_page):
+        for i in range(0, 40):
             try:
                 print(following[i])
             except IndexError:
@@ -105,36 +83,44 @@ class Executor:
             for menu in self.labels.loaded_labels['pagination_menu']:
                 print(menu['text'])
             command = int(input(">>> "))
-            if action == Executor.ACTION_FOLLOWERS:
-                if command == 1:
-                    self.current_page = self.current_page + 1
-                    self.print_followers(True)
-                elif command == 2:
-                    if self.current_page == 1:
-                        print(self.labels.loaded_labels['already_in_the_beginning'])
-                        continue
-                    self.current_page = self.current_page - 1
-                    self.print_followers(True)
-                elif command == 3:
-                    self.print_followers(True)
-            if action == Executor.ACTION_FOLLOWING:
-                if command == 1:
-                    self.current_page = self.current_page + 1
-                self.print_following(True)
-            elif command == 2:
-                if self.current_page == 1:
-                    print(self.labels.loaded_labels['already_in_the_beginning'])
-                    continue
-                self.current_page = self.current_page - 1
-                self.print_following(True)
-            elif command == 3:
-                self.print_following(True)
-            elif command == 0:
+            if command == 0:
                 print(self.labels.loaded_labels['pagination']['off'])
                 self.current_page = 1
                 break
+            elif action == Executor.ACTION_FOLLOWERS:
+                if 1 <= command <= 3:
+                    self.handle_followers_command_in_pagination(command)
+            elif action == Executor.ACTION_FOLLOWING:
+                if 1 <= command <= 3:
+                    self.handle_following_command_in_pagination(command)
             else:
                 print(self.labels.loaded_labels['command_not_found'])
+
+    def handle_followers_command_in_pagination(self, command):
+        if command == 1:
+            self.current_page = self.current_page + 1
+            self.print_followers(True)
+        elif command == 2:
+            if self.current_page == 1:
+                print(self.labels.loaded_labels['already_in_the_beginning'])
+                return
+            self.current_page = self.current_page - 1
+            self.print_followers(True)
+        elif command == 3:
+            self.print_followers(True)
+
+    def handle_following_command_in_pagination(self, command):
+        if command == 1:
+            self.current_page = self.current_page + 1
+            self.print_following(True)
+        elif command == 2:
+            if self.current_page == 1:
+                print(self.labels.loaded_labels['already_in_the_beginning'])
+                return
+            self.current_page = self.current_page - 1
+            self.print_following(True)
+        elif command == 3:
+            self.print_following(True)
 
     def unfollow_everyone(self):
         following = []
@@ -207,23 +193,9 @@ class Executor:
             print(save_option['label'])
         command = int(input(">>> "))
         if command == 1:
-            self.write_backup_to_csv(followers, target)
+            BackupManager.instance.write_backup_to_csv(followers, target)
         if command == 2:
-            self.write_backup_to_json(followers, target)
-
-    def write_backup_to_csv(self, followers, target):
-        with open(self.backup_dir + f'/{self.current_time()}.{target}.csv', 'w') as csc_file:
-            writer = csv.writer(csc_file)
-            writer.writerow(followers)
-
-    def write_backup_to_json(self, followers, target):
-        with open(self.backup_dir + f'/{self.current_time()}.{target}.json', 'w') as json_file:
-            json_users = json.dumps(followers)
-            json_file.write(json_users)
-
-    @staticmethod
-    def current_time():
-        return time.time()
+            BackupManager.instance.write_backup_to_json(followers, target)
 
 
 if __name__ == '__main__':
