@@ -10,3 +10,8 @@ def get_only_names(json_response):
     for user in json_response:
         names.append(user['login'])
     return names
+
+
+def get_token(labels):
+    print(labels.loaded_labels['enter_your_token'])
+    return str(input(">>> "))

@@ -124,7 +124,7 @@ class Executor:
 
     def unfollow_everyone(self):
         following = []
-        auth_token = self.get_token()
+        auth_token = utils.get_token(self.labels)
         self.current_page = 1
         while True:
             temp_following = utils.get_only_names(
@@ -135,12 +135,8 @@ class Executor:
             following = following + temp_following
             self.current_page = self.current_page + 1
 
-    def get_token(self):
-        print(self.labels.loaded_labels['enter_your_token'])
-        return str(input(">>> "))
-
     def start_reciprocity(self):
-        auth_token = self.get_token()
+        auth_token = utils.get_token(self.labels)
         following = self.get_all_following()
         followers = self.get_all_followers()
         for flwing in following:
