@@ -1,5 +1,5 @@
 import json
-from executor import labels as lb
+from preferences import labels as lb
 from pathlib import Path
 
 

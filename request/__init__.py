@@ -16,7 +16,7 @@ class GithubRequest:
 
     def get_followers_at(self, page):
         response = requests.get(self.url + f'/followers?per_page=40&page={page}',
-                            headers=self.headers)
+                                headers=self.headers)
         return response.json()
 
     def get_following_at(self, page):

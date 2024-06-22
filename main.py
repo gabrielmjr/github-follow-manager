@@ -3,9 +3,8 @@ import json
 import os.path
 import pathlib
 
-import executor.github_request
-from executor import labels as lb
-from executor import configs as confs
+from preferences import Configurations, labels as lb
+from request import GithubRequest
 import time
 from util import utils
 
@@ -21,7 +20,7 @@ class Executor:
         self.github_requests = None
         self.backup_dir = None
         self.create_backup_dir()
-        self.configs = confs.Configurations.get_instance()
+        self.configs = Configurations.get_instance()
         self.labels = None
         self.execute()
 
@@ -33,7 +32,7 @@ class Executor:
 
     def execute(self):
         self.labels = lb.LabelsManager.get_instance(self.configs.get_language())
-        self.github_requests = executor.github_request.GithubRequest(self.configs.get_username())
+        self.github_requests = GithubRequest(self.configs.get_username())
         self.handle_inputs()
 
     def handle_inputs(self):
