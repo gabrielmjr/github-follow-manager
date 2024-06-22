@@ -48,6 +48,8 @@ class Executor:
                 self.print_following(False)
             if command == 4:
                 self.unfollow_everyone()
+            if command == 5:
+                self.start_reciprocity()
             if command == 6:
                 self.start_followers_backup_process()
             if command == 7:
@@ -137,8 +139,7 @@ class Executor:
 
     def unfollow_everyone(self):
         following = []
-        print(self.labels.loaded_labels['enter_your_token'])
-        auth_token = str(input(">>> "))
+        auth_token = self.get_token()
         self.current_page = 1
         while True:
             temp_following = utils.get_only_names(
@@ -149,39 +150,58 @@ class Executor:
             following = following + temp_following
             self.current_page = self.current_page + 1
 
+    def get_token(self):
+        print(self.labels.loaded_labels['enter_your_token'])
+        return str(input(">>> "))
+
+    def start_reciprocity(self):
+        auth_token = self.get_token()
+        following = self.get_all_following()
+        followers = self.get_all_followers()
+        for flwing in following:
+            if flwing not in followers:
+                self.unfollow_user(flwing, auth_token)
+
     def unfollow_users(self, users, auth_token):
         are_everyone_unfollowed = True
         for user in users:
-            if not self.github_requests.unfollow(user, auth_token):
+            if not self.unfollow_user(user, auth_token):
                 are_everyone_unfollowed = False
         if are_everyone_unfollowed:
             print(self.labels.loaded_labels['unfollowed_everyone'])
         else:
             print(self.labels.loaded_labels['error']['unknown'])
 
+    def unfollow_user(self, user, token):
+        return self.github_requests.unfollow(user, token)
+
     def start_followers_backup_process(self):
+        self.save_users(self.get_all_followers(), 'followers')
+
+    def get_all_followers(self):
         followers = []
         self.current_page = 1
         while True:
             temp_followers = utils.get_only_names(
                 self.github_requests.get_followers_at(self.current_page))
             if len(temp_followers) == 0:
-                self.save_users(followers, 'followers')
-                break
+                return followers
             followers = followers + temp_followers
             self.current_page += 1
 
-    def start_following_backup_process(self):
+    def get_all_following(self):
         following = []
         self.current_page = 1
         while True:
             temp_followings = utils.get_only_names(
                 self.github_requests.get_following_at(self.current_page))
             if len(temp_followings) == 0:
-                self.save_users(following, 'following')
-                break
+                return following
             following = following + temp_followings
             self.current_page += 1
+
+    def start_following_backup_process(self):
+        self.save_users(self.get_all_following(), 'following')
 
     def save_users(self, followers, target):
         for save_option in self.labels.loaded_labels['save_options']:

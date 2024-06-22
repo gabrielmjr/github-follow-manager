@@ -15,8 +15,9 @@ class GithubRequest:
         self.url = f"https://api.github.com/users/{username}"
 
     def get_followers_at(self, page):
-        return requests.get(self.url + f'/followers?per_page=40&page={page}',
-                            headers=self.headers).json()
+        response = requests.get(self.url + f'/followers?per_page=40&page={page}',
+                            headers=self.headers)
+        return response.json()
 
     def get_following_at(self, page):
         return requests.get(self.url + f'/following?per_page=40&page={page}',
@@ -25,8 +26,9 @@ class GithubRequest:
     def unfollow(self, user, auth_token):
         headers = dict(list(self.headers.items()) + list({"Authorization": "token " + auth_token}.items()))
         url = f'https://api.github.com/user/following/{user}'
-        code = requests.delete(url, headers=headers).status_code
-        if code == http.client.NO_CONTENT:
+        response = requests.delete(url, headers=headers)
+        if response.status_code == http.client.NO_CONTENT:
+            print()
             return True
         return False
 
