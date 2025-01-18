@@ -3,6 +3,7 @@ import utils
 from backup import BackupManager
 from preferences import Configurations, labels as lb
 from request import GithubRequest
+from utils import println
 
 
 class Executor:
@@ -24,28 +25,35 @@ class Executor:
     def handle_inputs(self):
         while True:
             self.current_page = 1
+            println()
             for label in self.labels.get_menu():
                 print(label['text'])
             command = int(input(">>> "))
             if command == 1:
+                println()
                 self.print_followers(False)
             if command == 2:
+                println()
                 self.print_following(False)
             if command == 4:
+                println()
                 self.unfollow_everyone()
             if command == 5:
+                println()
                 self.start_reciprocity()
             if command == 6:
+                println()
                 self.start_followers_backup_process()
             if command == 7:
+                println()
                 self.start_following_backup_process()
 
     def print_followers(self, is_in_pagination):
-        print(f"{self.labels.loaded_labels['listing_followers']}\n")
+        println(f"{self.labels.loaded_labels['listing_followers']}\n")
         followers = utils.get_only_names(self.github_requests
                                          .get_followers_at(self.current_page))
         if len(followers) == 0:
-            print(self.labels.loaded_labels['empty_page'])
+            println(self.labels.loaded_labels['empty_page'])
             return
         for i in range(0, 40):
             try:
@@ -71,6 +79,7 @@ class Executor:
         if not is_in_pagination:
             print(10 * '-')
             self.start_pagination(Executor.ACTION_FOLLOWING)
+        println()
 
     def start_pagination(self, action):
         must_stop = False
@@ -94,7 +103,7 @@ class Executor:
                 if 1 <= command <= 3:
                     self.handle_following_command_in_pagination(command)
             else:
-                print(self.labels.loaded_labels['command_not_found'])
+                println(self.labels.loaded_labels['command_not_found'])
 
     def handle_followers_command_in_pagination(self, command):
         if command == 1:
@@ -102,7 +111,7 @@ class Executor:
             self.print_followers(True)
         elif command == 2:
             if self.current_page == 1:
-                print(self.labels.loaded_labels['already_in_the_beginning'])
+                println(self.labels.loaded_labels['already_in_the_beginning'])
                 return
             self.current_page = self.current_page - 1
             self.print_followers(True)
