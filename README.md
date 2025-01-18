@@ -63,8 +63,14 @@ This is a project that was made in Python and you can use it to:
 7. Congratulation, you've setup your environment and ran the GitHub Follow Manager, there will be instructions to use, the program is terminal friendly, there's usage menu that makes it easy to use.
 <br/>
 
+>[!Important]
+> To use some follow/unfollow option, you will be requested to enter your [Github Fine Grained Personal Token with](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) Account permission > Followers > read and write access. [click here](https://github.com/settings/personal-access-tokens/new) to create a new.
+
+>[!Note]
+> The program just makes request to the [Github API](https://docs.github.com/en/rest/users?apiVersion=2022-11-28), nothing else, it only stores the username and the prefered language in a json located in 'project parent dir'/resources/configs,json, due to security reasons, the Token you provides the app during the execution when prompted are never stored nor shared, that's why you will be always prompted to enter the token to perform some action that requires it (such as follow/unfollow features).
+
 >[!Note] 
-> In subsequent times, to run the program, follow the step 2, then 4 and finally 6
+> In subsequent times, to run the program, follow the step 2, then 4 and finally 6.
 
 ## Additional
 If you are facing some issue related to the GitHub Follow Manager, you can open an issue, else if you can, clone the source code, improve or refactor it and make a pull request, if it be useful, then I'll merge.
