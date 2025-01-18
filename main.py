@@ -192,9 +192,9 @@ class Executor:
             print(save_option['text'])
         command = int(input(">>> "))
         if command == 1:
-            BackupManager.instance.write_backup_to_csv(followers, target)
+            BackupManager.get_instance().write_backup_to_csv(followers, target)
         if command == 2:
-            BackupManager.instance.write_backup_to_json(followers, target)
+            BackupManager.get_instance().write_backup_to_json(followers, target)
 
 
 if __name__ == '__main__':

@@ -13,7 +13,7 @@ class BackupManager:
         self.create_backup_dir()
 
     def create_backup_dir(self):
-        self.backup_dir = (f'{Path(__file__).parent.resolve().absolute()}' +
+        self.backup_dir = (f'{Path(__file__).parent.resolve().absolute()}/..' +
                            '/resources/backups')
         if not os.path.isdir(self.backup_dir):
             os.mkdir(self.backup_dir)
