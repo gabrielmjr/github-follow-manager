@@ -30,30 +30,44 @@ This is a project that was made in Python and you can use it to:
 > To use the GitHub Follow Manager, you've to be with Python (3) installed in your environment, if you don't have it installed, you can download it from the [official site](https://www.python.org/downloads/), alternativery you can [follow this tutorial](https://kinsta.com/knowledgebase/install-python/) or google `how to install python in <the OS name intalled on your machine>` and follow the instructions.
 
 1. Clone the git project using:
-> [!Note]
-> After first release, you'll have option of download the stable release source code and then run the script instead of clonning it.
+  > [!Note]
+  > After first release, you'll have option of download the stable release source code and then run the script instead of clonning it.
 
 
        git clone https://github.com/gabrielmjr/github-follow-manager
 
+2. Open up the `github-follow-manager` folder
 
-3. Open up the `github-follow-manager` folder and install all the required libraries as followed:
+       cd github-follow-manager
 
-        cd github-follow-manager
-        pip install -r (or --requirement) requirements.txt
+3. Create a new Python Virtual Environment (venv) and activate it
+> [!Note]
+> Only create a new virtual environment after clone the project.
+  
+       python -m venv .venv 
+
+4. Start the environment
+ 
+       source .venv/bin/activate
+
+5. Install all the required libraries as followed:
+
+       pip install --requirement requirements.txt
    The above code will install all required libraries to execute the program, in this case is only the [requests](https://pypi.org/project/requests) library, after the installation of this library you can go to next step.
 
-4. Run the `main.py` file as followed:
+
+6. Run the `main.py` file as followed:
 
        python main.py
    
-5. Congratulation, you've setup your environment and runned the GitHub Follow Manager, there will be instructions to use, the program is terminal friendly, there's usage menu that makes it easy to use.
+7. Congratulation, you've setup your environment and ran the GitHub Follow Manager, there will be instructions to use, the program is terminal friendly, there's usage menu that makes it easy to use.
 <br/>
+
+>[!Note] 
+> In subsequent times, to run the program, follow the step 2, then 4 and finally 6
 
 ## Additional
 If you are facing some issue related to the GitHub Follow Manager, you can open an issue, else if you can, clone the source code, improve or refactor it and make a pull request, if it be useful, then I'll merge.
-
-<br/>
 
 ## License   
 ```Copyright 2024 Gabriel MJr```.
