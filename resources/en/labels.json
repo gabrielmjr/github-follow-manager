@@ -51,6 +51,7 @@
   "enter_your_token": "Enter your github auth token: ",
   "followed_everyone": "Followed everyone.",
   "unfollowed_everyone": "Unfollowed everyone.",
+  "unfollowed_everyone_wor_not_following": "Unfollowed everyone who are not following you.",
   "error": {
     "unknown": "Something went wrong."
   },

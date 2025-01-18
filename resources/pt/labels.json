@@ -46,11 +46,12 @@
   "others": {
     "ask_name": "Insira o seu nome de usu�rio do Github: "
   },
-  "already_in_the_beginning": "J� est� no inicio.",
+  "already_in_the_beginning": "Já está no inicio.",
   "command_not_found": "Comando n�o encontrado.",
   "enter_your_token": "Insira o seu token de autenticaç�o do Github: ",
-  "followed_everyone": "J� est� seguindo todos.",
+  "followed_everyone": "á� está seguindo todos.",
   "unfollowed_everyone": "Deixou de seguir todos.",
+  "unfollowed_everyone_wor_not_following": "Deixou de seguir a todos os que não lhe seguem",
   "error": {
     "unknown": "Algo ocorreu mal."
   },
