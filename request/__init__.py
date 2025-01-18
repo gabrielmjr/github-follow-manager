@@ -24,11 +24,10 @@ class GithubRequest:
                             headers=self.headers).json()
 
     def unfollow(self, user, auth_token):
-        headers = dict(list(self.headers.items()) + list({"Authorization": "token " + auth_token}.items()))
+        headers = dict(list(self.headers.items()) + list({"Authorization": "Bearer " + auth_token}.items()))
         url = f'https://api.github.com/user/following/{user}'
         response = requests.delete(url, headers=headers)
         if response.status_code == http.client.NO_CONTENT:
-            print()
             return True
         return False
 
